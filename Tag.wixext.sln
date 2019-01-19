@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "tag", "src\wixlib\tag.wixproj", "{47BD326B-88F2-428F-9145-3397DD404E64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WixToolset.Tag.wixext", "src\wixext\WixToolset.Tag.wixext.csproj", "{696EB455-0EF3-47C0-8A02-86FF5D8CC791}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WixToolsetTest.Tag", "src\test\WixToolsetTest.Tag\WixToolsetTest.Tag.csproj", "{B2D19A6C-754C-4471-B3D9-040B9FC513F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Debug|Any CPU.Build.0 = Debug|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Debug|x64.ActiveCfg = Debug|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Debug|x86.ActiveCfg = Debug|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Debug|x86.Build.0 = Debug|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Release|Any CPU.ActiveCfg = Release|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Release|Any CPU.Build.0 = Release|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Release|x64.ActiveCfg = Release|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Release|x86.ActiveCfg = Release|x86
+		{47BD326B-88F2-428F-9145-3397DD404E64}.Release|x86.Build.0 = Release|x86
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Debug|x64.Build.0 = Debug|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Debug|x86.Build.0 = Debug|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Release|x64.ActiveCfg = Release|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Release|x64.Build.0 = Release|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Release|x86.ActiveCfg = Release|Any CPU
+		{696EB455-0EF3-47C0-8A02-86FF5D8CC791}.Release|x86.Build.0 = Release|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Release|x64.Build.0 = Release|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2D19A6C-754C-4471-B3D9-040B9FC513F9}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0ACA8AEC-8A38-4596-8A76-7C171F27CC17}
+	EndGlobalSection
+EndGlobal

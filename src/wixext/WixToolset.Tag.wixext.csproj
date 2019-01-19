@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>WixToolset.Tag</RootNamespace>
+    <Description>WiX Toolset Tag Extension</Description>
+    <Title>WiX Toolset Tag Extension</Title>
+    <IsTool>true</IsTool>
+    <ContentTargetFolders>build</ContentTargetFolders>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileName).targets" />
+    <Content Include="tag.xsd" PackagePath="tools" />
+    <EmbeddedResource Include="tables.xml" />
+    <EmbeddedResource Include="$(OutputPath)..\tag.wixlib" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Dtf.WindowsInstaller" Version="4.0.*" NoWarn="NU1701" />
+    <PackageReference Include="WixToolset.Extensibility" Version="4.0.*" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\wixlib\tag.wixproj" ReferenceOutputAssembly="false" Condition=" '$(NCrunch)'=='' " />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.1.65" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
