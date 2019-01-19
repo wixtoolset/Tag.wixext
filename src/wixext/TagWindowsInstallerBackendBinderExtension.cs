@@ -1,22 +1,38 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information.
 
-namespace WixToolset.Extensions
+namespace WixToolset.Tag
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Xml;
     using WixToolset.Data;
-    using WixToolset.Data.Rows;
+    using WixToolset.Data.WindowsInstaller;
     using WixToolset.Dtf.WindowsInstaller;
     using WixToolset.Extensibility;
 
     /// <summary>
     /// The Binder for the WiX Toolset Software Id Tag Extension.
     /// </summary>
-    public sealed class TagBinder : BinderExtension
+    public sealed class TagWindowsInstallerBackendBinderExtension : BaseWindowsInstallerBackendBinderExtension
     {
+        private static readonly TableDefinition[] Tables = LoadTables();
+
+        protected override TableDefinition[] TableDefinitionsForTuples => Tables;
+
+        private static TableDefinition[] LoadTables()
+        {
+            using (var resourceStream = typeof(TagWindowsInstallerBackendBinderExtension).Assembly.GetManifestResourceStream("WixToolset.Tag.tables.xml"))
+            using (var reader = XmlReader.Create(resourceStream))
+            {
+                var tables = TableDefinitionCollection.Load(reader);
+                return tables.ToArray();
+            }
+        }
+
+#if TODO_TAG_BINDER_EXTENSION
         private string overallRegid;
         private RowDictionary<Row> swidRows = new RowDictionary<Row>();
 
@@ -413,5 +429,6 @@ namespace WixToolset.Extensions
             public string Id { get; set; }
             public TagType Type { get; set; }
         }
+#endif
     }
 }
