@@ -229,6 +229,7 @@ namespace WixToolset.Tag
 
                 this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, "Directory", directoryId);
 
+#if TODO_MODERNIZATION
                 var componentRow = (ComponentTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "Component", fileId);
                 componentRow.ComponentId = "*";
                 componentRow.Attributes = 0;
@@ -248,6 +249,7 @@ namespace WixToolset.Tag
                 wixFileRow.DiskId = 1;
                 wixFileRow.Attributes = 1;
                 wixFileRow.Source = new IntermediateFieldPathValue { Path = String.Concat("%TEMP%\\", fileName) };
+#endif
 
                 this.ParseHelper.EnsureTable(section, sourceLineNumbers, "SoftwareIdentificationTag");
                 var row = (WixProductTagTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "WixProductTag", fileId);
