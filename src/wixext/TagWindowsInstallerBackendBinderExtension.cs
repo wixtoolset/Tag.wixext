@@ -20,7 +20,7 @@ namespace WixToolset.Tag
     {
         private static readonly TableDefinition[] Tables = LoadTables();
 
-        protected override TableDefinition[] TableDefinitionsForTuples => Tables;
+        public override IEnumerable<TableDefinition> TableDefinitions => Tables;
 
         private static TableDefinition[] LoadTables()
         {
