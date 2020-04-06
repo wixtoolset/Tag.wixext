@@ -11,7 +11,7 @@ namespace WixToolset.Tag
             TagTupleDefinitionType.WixProductTag.ToString(),
             new[]
             {
-                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.File_), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.FileRef), IntermediateFieldType.String),
                 new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Regid), IntermediateFieldType.String),
                 new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Name), IntermediateFieldType.String),
                 new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Attributes), IntermediateFieldType.Number),
@@ -27,7 +27,7 @@ namespace WixToolset.Tag.Tuples
 
     public enum WixProductTagTupleFields
     {
-        File_,
+        FileRef,
         Regid,
         Name,
         Attributes,
@@ -46,10 +46,10 @@ namespace WixToolset.Tag.Tuples
 
         public IntermediateField this[WixProductTagTupleFields index] => this.Fields[(int)index];
 
-        public string File_
+        public string FileRef
         {
-            get => this.Fields[(int)WixProductTagTupleFields.File_].AsString();
-            set => this.Set((int)WixProductTagTupleFields.File_, value);
+            get => this.Fields[(int)WixProductTagTupleFields.FileRef].AsString();
+            set => this.Set((int)WixProductTagTupleFields.FileRef, value);
         }
 
         public string Regid
