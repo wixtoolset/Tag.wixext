@@ -11,7 +11,7 @@ namespace WixToolset.Tag
             TagTupleDefinitionType.SoftwareIdentificationTag.ToString(),
             new[]
             {
-                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.File_), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.FileRef), IntermediateFieldType.String),
                 new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.Regid), IntermediateFieldType.String),
                 new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.UniqueId), IntermediateFieldType.String),
                 new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.Type), IntermediateFieldType.String),
@@ -26,7 +26,7 @@ namespace WixToolset.Tag.Tuples
 
     public enum SoftwareIdentificationTagTupleFields
     {
-        File_,
+        FileRef,
         Regid,
         UniqueId,
         Type,
@@ -44,10 +44,10 @@ namespace WixToolset.Tag.Tuples
 
         public IntermediateField this[SoftwareIdentificationTagTupleFields index] => this.Fields[(int)index];
 
-        public string File_
+        public string FileRef
         {
-            get => this.Fields[(int)SoftwareIdentificationTagTupleFields.File_].AsString();
-            set => this.Set((int)SoftwareIdentificationTagTupleFields.File_, value);
+            get => this.Fields[(int)SoftwareIdentificationTagTupleFields.FileRef].AsString();
+            set => this.Set((int)SoftwareIdentificationTagTupleFields.FileRef, value);
         }
 
         public string Regid

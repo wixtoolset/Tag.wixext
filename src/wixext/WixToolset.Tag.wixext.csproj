@@ -13,7 +13,6 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileName).targets" />
     <Content Include="tag.xsd" PackagePath="tools" />
-    <EmbeddedResource Include="tables.xml" />
     <EmbeddedResource Include="$(OutputPath)..\tag.wixlib" />
   </ItemGroup>
   <ItemGroup>

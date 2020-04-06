@@ -73,13 +73,13 @@ namespace WixToolset.Tag
         /// <param name="node">The element to parse.</param>
         private void ParseBundleTagElement(Intermediate intermediate, IntermediateSection section, XElement node)
         {
-            SourceLineNumber sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
+            var sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
             string name = null;
             string regid = null;
-            YesNoType licensed = YesNoType.NotSet;
+            var licensed = YesNoType.NotSet;
             string type = null;
 
-            foreach (XAttribute attrib in node.Attributes())
+            foreach (var attrib in node.Attributes())
             {
                 if (String.IsNullOrEmpty(attrib.Name.NamespaceName) || this.Namespace == attrib.Name.Namespace)
                 {
@@ -112,7 +112,7 @@ namespace WixToolset.Tag
 
             if (String.IsNullOrEmpty(name))
             {
-                XAttribute productNameAttribute = node.Parent.Attribute("Name");
+                var productNameAttribute = node.Parent.Attribute("Name");
                 if (null != productNameAttribute)
                 {
                     name = productNameAttribute.Value;
@@ -135,18 +135,21 @@ namespace WixToolset.Tag
 
             if (!this.Messaging.EncounteredError)
             {
-                string fileName = String.Concat(regid, " ", name, ".swidtag");
+                var fileName = String.Concat(regid, " ", name, ".swidtag");
 
-                var tagRow = (WixBundleTagTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "WixBundleTag");
-                tagRow.Filename = fileName;
-                tagRow.Regid = regid;
-                tagRow.Name = name;
+                var tagTuple = section.AddTuple(new WixBundleTagTuple(sourceLineNumbers)
+                {
+                    Filename = fileName,
+                    Regid = regid,
+                    Name = name,
+                    // TagXml is set by the binder.
+                    Type = type,
+                });
+
                 if (YesNoType.Yes == licensed)
                 {
-                    tagRow.Attributes = 1;
+                    tagTuple.Attributes = 1;
                 }
-                // TagXml is set by the binder.
-                tagRow.Type = type;
             }
         }
 
@@ -156,14 +159,14 @@ namespace WixToolset.Tag
         /// <param name="node">The element to parse.</param>
         private void ParseProductTagElement(Intermediate intermediate, IntermediateSection section, XElement node)
         {
-            SourceLineNumber sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
+            var sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
             string name = null;
             string regid = null;
-            string feature = "WixSwidTag";
-            YesNoType licensed = YesNoType.NotSet;
+            var feature = "WixSwidTag";
+            var licensed = YesNoType.NotSet;
             string type = null;
 
-            foreach (XAttribute attrib in node.Attributes())
+            foreach (var attrib in node.Attributes())
             {
                 if (String.IsNullOrEmpty(attrib.Name.NamespaceName) || this.Namespace == attrib.Name.Namespace)
                 {
@@ -199,7 +202,7 @@ namespace WixToolset.Tag
 
             if (String.IsNullOrEmpty(name))
             {
-                XAttribute productNameAttribute = node.Parent.Attribute("Name");
+                var productNameAttribute = node.Parent.Attribute("Name");
                 if (null != productNameAttribute)
                 {
                     name = productNameAttribute.Value;
@@ -222,46 +225,48 @@ namespace WixToolset.Tag
 
             if (!this.Messaging.EncounteredError)
             {
-                string directoryId = "WixTagRegidFolder";
-                Identifier fileId = this.ParseHelper.CreateIdentifier("tag", regid, ".product.tag");
-                string fileName = String.Concat(regid, " ", name, ".swidtag");
-                string shortName = this.ParseHelper.CreateShortName(fileName, false, false);
+                var directoryId = "WixTagRegidFolder";
+                var fileId = this.ParseHelper.CreateIdentifier("tag", regid, ".product.tag");
+                var fileName = String.Concat(regid, " ", name, ".swidtag");
+                var shortName = this.ParseHelper.CreateShortName(fileName, false, false);
 
-                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, "Directory", directoryId);
+                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, TupleDefinitions.Directory, directoryId);
 
-#if TODO_MODERNIZATION
-                var componentRow = (ComponentTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "Component", fileId);
-                componentRow.ComponentId = "*";
-                componentRow.Attributes = 0;
-                componentRow.Directory_ = directoryId;
-                componentRow.KeyPath = fileId.Id;
+                section.AddTuple(new ComponentTuple(sourceLineNumbers, fileId)
+                {
+                    ComponentId = "*",
+                    DirectoryRef = directoryId,
+                    KeyPath = fileId.Id,
+                });
 
-                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, "Feature", feature);
+                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, TupleDefinitions.Feature, feature);
                 this.ParseHelper.CreateComplexReference(section, sourceLineNumbers, ComplexReferenceParentType.Feature, feature, null, ComplexReferenceChildType.Component, fileId.Id, true);
 
-                var fileRow = (FileTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "File", fileId);
-                fileRow.Component_ = fileId.Id;
-                fileRow.File = String.Concat(shortName, "|", fileName);
+                section.AddTuple(new FileTuple(sourceLineNumbers, fileId)
+                {
+                    Attributes = FileTupleAttributes.ReadOnly,
+                    ComponentRef = fileId.Id,
+                    DirectoryRef = directoryId,
+                    DiskId = 1,
+                    Name = fileName,
+                    ShortName = shortName,
+                    Source = new IntermediateFieldPathValue { Path = String.Concat("%TEMP%\\", fileName) },
+                });
 
-                var wixFileRow = (WixFileTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "WixFile");
-                wixFileRow.Directory_ = directoryId;
-                wixFileRow.File_ = fileId.Id;
-                wixFileRow.DiskId = 1;
-                wixFileRow.Attributes = 1;
-                wixFileRow.Source = new IntermediateFieldPathValue { Path = String.Concat("%TEMP%\\", fileName) };
-#endif
+                this.ParseHelper.EnsureTable(section, sourceLineNumbers, TagTableDefinitions.SoftwareIdentificationTag);
+                var tuple = section.AddTuple(new WixProductTagTuple(sourceLineNumbers, fileId)
+                {
+                    Regid = regid,
+                    Name = name,
+                    Type = type,
+                });
 
-                this.ParseHelper.EnsureTable(section, sourceLineNumbers, "SoftwareIdentificationTag");
-                var row = (WixProductTagTuple)this.ParseHelper.CreateRow(section, sourceLineNumbers, "WixProductTag", fileId);
-                row.Regid = regid;
-                row.Name = name;
                 if (YesNoType.Yes == licensed)
                 {
-                    row.Attributes = 1;
+                    tuple.Attributes = 1;
                 }
-                row.Type = type;
 
-                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, "File", fileId.Id);
+                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, TupleDefinitions.File, fileId.Id);
             }
         }
 
@@ -271,10 +276,10 @@ namespace WixToolset.Tag
         /// <param name="node">The element to parse.</param>
         private void ParseTagRefElement(Intermediate intermediate, IntermediateSection section, XElement node)
         {
-            SourceLineNumber sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
+            var sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
             string regid = null;
 
-            foreach (XAttribute attrib in node.Attributes())
+            foreach (var attrib in node.Attributes())
             {
                 if (String.IsNullOrEmpty(attrib.Name.NamespaceName) || this.Namespace == attrib.Name.Namespace)
                 {
@@ -303,16 +308,17 @@ namespace WixToolset.Tag
 
             if (!this.Messaging.EncounteredError)
             {
-                Identifier id = this.ParseHelper.CreateIdentifier("tag", regid, ".product.tag");
+                var id = this.ParseHelper.CreateIdentifier("tag", regid, ".product.tag");
 #if TODO_PATCHING
                 this.ParseHelper.CreatePatchFamilyChildReference(sourceLineNumbers, "Component", id.Id);
 #endif
+                throw new NotImplementedException();
             }
         }
 
         private string ParseTagTypeAttribute(SourceLineNumber sourceLineNumbers, XElement node, XAttribute attrib)
         {
-            string typeValue = this.ParseHelper.GetAttributeValue(sourceLineNumbers, attrib);
+            var typeValue = this.ParseHelper.GetAttributeValue(sourceLineNumbers, attrib);
             switch (typeValue)
             {
                 case "application":

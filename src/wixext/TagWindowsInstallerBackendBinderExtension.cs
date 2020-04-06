@@ -18,19 +18,7 @@ namespace WixToolset.Tag
     /// </summary>
     public sealed class TagWindowsInstallerBackendBinderExtension : BaseWindowsInstallerBackendBinderExtension
     {
-        private static readonly TableDefinition[] Tables = LoadTables();
-
-        public override IEnumerable<TableDefinition> TableDefinitions => Tables;
-
-        private static TableDefinition[] LoadTables()
-        {
-            using (var resourceStream = typeof(TagWindowsInstallerBackendBinderExtension).Assembly.GetManifestResourceStream("WixToolset.Tag.tables.xml"))
-            using (var reader = XmlReader.Create(resourceStream))
-            {
-                var tables = TableDefinitionCollection.Load(reader);
-                return tables.ToArray();
-            }
-        }
+        public override IEnumerable<TableDefinition> TableDefinitions => TagTableDefinitions.All;
 
 #if TODO_TAG_BINDER_EXTENSION
         private string overallRegid;
