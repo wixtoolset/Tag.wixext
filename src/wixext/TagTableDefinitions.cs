@@ -6,22 +6,6 @@ namespace WixToolset.Tag
 
     public static class TagTableDefinitions
     {
-        public static readonly TableDefinition WixBundleTag = new TableDefinition(
-            "WixBundleTag",
-            new[]
-            {
-                new ColumnDefinition("Filename", ColumnType.String, 255, primaryKey: true, nullable: false, ColumnCategory.Filename, description: "The file name for the software id tag."),
-                new ColumnDefinition("Regid", ColumnType.String, 0, primaryKey: true, nullable: false, ColumnCategory.Text, description: "The regid for the software id tag."),
-                new ColumnDefinition("Name", ColumnType.String, 255, primaryKey: false, nullable: true, ColumnCategory.Text, description: "The name for the software id tag."),
-                new ColumnDefinition("Attributes", ColumnType.Number, 4, primaryKey: false, nullable: true, ColumnCategory.Unknown, minValue: 0, maxValue: 2147483647, description: "A 32-bit word that specifies bits of software id tag."),
-                new ColumnDefinition("Xml", ColumnType.String, 0, primaryKey: false, nullable: true, ColumnCategory.Text, description: "The software id tag as XML. Only valid after binding"),
-                new ColumnDefinition("Type", ColumnType.String, 0, primaryKey: false, nullable: true, ColumnCategory.Text, description: "The type of the software id tag."),
-            },
-            unreal: true,
-            tupleDefinitionName: "WixBundleTag",
-            tupleIdIsPrimaryKey: false
-        );
-
         public static readonly TableDefinition WixProductTag = new TableDefinition(
             "WixProductTag",
             new[]
@@ -52,7 +36,6 @@ namespace WixToolset.Tag
 
         public static readonly TableDefinition[] All = new[]
         {
-            WixBundleTag,
             WixProductTag,
             SoftwareIdentificationTag,
         };
