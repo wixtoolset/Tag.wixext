@@ -3,28 +3,28 @@
 namespace WixToolset.Tag
 {
     using WixToolset.Data;
-    using WixToolset.Tag.Tuples;
+    using WixToolset.Tag.Symbols;
 
-    public static partial class TagTupleDefinitions
+    public static partial class TagSymbolDefinitions
     {
-        public static readonly IntermediateTupleDefinition SoftwareIdentificationTag = new IntermediateTupleDefinition(
-            TagTupleDefinitionType.SoftwareIdentificationTag.ToString(),
+        public static readonly IntermediateSymbolDefinition SoftwareIdentificationTag = new IntermediateSymbolDefinition(
+            TagSymbolDefinitionType.SoftwareIdentificationTag.ToString(),
             new[]
             {
-                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.FileRef), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.Regid), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.UniqueId), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagTupleFields.Type), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagSymbolFields.FileRef), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagSymbolFields.Regid), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagSymbolFields.UniqueId), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(SoftwareIdentificationTagSymbolFields.Type), IntermediateFieldType.String),
             },
-            typeof(SoftwareIdentificationTagTuple));
+            typeof(SoftwareIdentificationTagSymbol));
     }
 }
 
-namespace WixToolset.Tag.Tuples
+namespace WixToolset.Tag.Symbols
 {
     using WixToolset.Data;
 
-    public enum SoftwareIdentificationTagTupleFields
+    public enum SoftwareIdentificationTagSymbolFields
     {
         FileRef,
         Regid,
@@ -32,40 +32,40 @@ namespace WixToolset.Tag.Tuples
         Type,
     }
 
-    public class SoftwareIdentificationTagTuple : IntermediateTuple
+    public class SoftwareIdentificationTagSymbol : IntermediateSymbol
     {
-        public SoftwareIdentificationTagTuple() : base(TagTupleDefinitions.SoftwareIdentificationTag, null, null)
+        public SoftwareIdentificationTagSymbol() : base(TagSymbolDefinitions.SoftwareIdentificationTag, null, null)
         {
         }
 
-        public SoftwareIdentificationTagTuple(SourceLineNumber sourceLineNumber, Identifier id = null) : base(TagTupleDefinitions.SoftwareIdentificationTag, sourceLineNumber, id)
+        public SoftwareIdentificationTagSymbol(SourceLineNumber sourceLineNumber, Identifier id = null) : base(TagSymbolDefinitions.SoftwareIdentificationTag, sourceLineNumber, id)
         {
         }
 
-        public IntermediateField this[SoftwareIdentificationTagTupleFields index] => this.Fields[(int)index];
+        public IntermediateField this[SoftwareIdentificationTagSymbolFields index] => this.Fields[(int)index];
 
         public string FileRef
         {
-            get => this.Fields[(int)SoftwareIdentificationTagTupleFields.FileRef].AsString();
-            set => this.Set((int)SoftwareIdentificationTagTupleFields.FileRef, value);
+            get => this.Fields[(int)SoftwareIdentificationTagSymbolFields.FileRef].AsString();
+            set => this.Set((int)SoftwareIdentificationTagSymbolFields.FileRef, value);
         }
 
         public string Regid
         {
-            get => this.Fields[(int)SoftwareIdentificationTagTupleFields.Regid].AsString();
-            set => this.Set((int)SoftwareIdentificationTagTupleFields.Regid, value);
+            get => this.Fields[(int)SoftwareIdentificationTagSymbolFields.Regid].AsString();
+            set => this.Set((int)SoftwareIdentificationTagSymbolFields.Regid, value);
         }
 
         public string UniqueId
         {
-            get => this.Fields[(int)SoftwareIdentificationTagTupleFields.UniqueId].AsString();
-            set => this.Set((int)SoftwareIdentificationTagTupleFields.UniqueId, value);
+            get => this.Fields[(int)SoftwareIdentificationTagSymbolFields.UniqueId].AsString();
+            set => this.Set((int)SoftwareIdentificationTagSymbolFields.UniqueId, value);
         }
 
         public string Type
         {
-            get => this.Fields[(int)SoftwareIdentificationTagTupleFields.Type].AsString();
-            set => this.Set((int)SoftwareIdentificationTagTupleFields.Type, value);
+            get => this.Fields[(int)SoftwareIdentificationTagSymbolFields.Type].AsString();
+            set => this.Set((int)SoftwareIdentificationTagSymbolFields.Type, value);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace WixToolset.Tag
     {
         public static readonly TableDefinition WixProductTag = new TableDefinition(
             "WixProductTag",
-            TagTupleDefinitions.WixProductTag,
+            TagSymbolDefinitions.WixProductTag,
             new[]
             {
                 new ColumnDefinition("File_", ColumnType.String, 72, primaryKey: true, nullable: false, ColumnCategory.Identifier, keyTable: "File", keyColumn: 1, description: "The file representing the software id tag.", modularizeType: ColumnModularizeType.Column),
@@ -18,12 +18,12 @@ namespace WixToolset.Tag
                 new ColumnDefinition("Type", ColumnType.String, 0, primaryKey: false, nullable: true, ColumnCategory.Text, description: "The type of the software id tag."),
             },
             unreal: true,
-            tupleIdIsPrimaryKey: false
+            symbolIdIsPrimaryKey: false
         );
 
         public static readonly TableDefinition SoftwareIdentificationTag = new TableDefinition(
             "SoftwareIdentificationTag",
-            TagTupleDefinitions.SoftwareIdentificationTag,
+            TagSymbolDefinitions.SoftwareIdentificationTag,
             new[]
             {
                 new ColumnDefinition("File_", ColumnType.String, 72, primaryKey: true, nullable: false, ColumnCategory.Identifier, keyTable: "File", keyColumn: 1, description: "The file that installs the software id tag.", modularizeType: ColumnModularizeType.Column),
@@ -31,7 +31,7 @@ namespace WixToolset.Tag
                 new ColumnDefinition("UniqueId", ColumnType.String, 0, primaryKey: false, nullable: false, ColumnCategory.Text, description: "The unique id for the software id tag."),
                 new ColumnDefinition("Type", ColumnType.String, 0, primaryKey: false, nullable: false, ColumnCategory.Text, description: "The type of the software id tag."),
             },
-            tupleIdIsPrimaryKey: false
+            symbolIdIsPrimaryKey: false
         );
 
         public static readonly TableDefinition[] All = new[]
