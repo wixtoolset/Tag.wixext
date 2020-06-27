@@ -3,29 +3,29 @@
 namespace WixToolset.Tag
 {
     using WixToolset.Data;
-    using WixToolset.Tag.Tuples;
+    using WixToolset.Tag.Symbols;
 
-    public static partial class TagTupleDefinitions
+    public static partial class TagSymbolDefinitions
     {
-        public static readonly IntermediateTupleDefinition WixProductTag = new IntermediateTupleDefinition(
-            TagTupleDefinitionType.WixProductTag.ToString(),
+        public static readonly IntermediateSymbolDefinition WixProductTag = new IntermediateSymbolDefinition(
+            TagSymbolDefinitionType.WixProductTag.ToString(),
             new[]
             {
-                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.FileRef), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Regid), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Name), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Attributes), IntermediateFieldType.Number),
-                new IntermediateFieldDefinition(nameof(WixProductTagTupleFields.Type), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixProductTagSymbolFields.FileRef), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixProductTagSymbolFields.Regid), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixProductTagSymbolFields.Name), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixProductTagSymbolFields.Attributes), IntermediateFieldType.Number),
+                new IntermediateFieldDefinition(nameof(WixProductTagSymbolFields.Type), IntermediateFieldType.String),
             },
-            typeof(WixProductTagTuple));
+            typeof(WixProductTagSymbol));
     }
 }
 
-namespace WixToolset.Tag.Tuples
+namespace WixToolset.Tag.Symbols
 {
     using WixToolset.Data;
 
-    public enum WixProductTagTupleFields
+    public enum WixProductTagSymbolFields
     {
         FileRef,
         Regid,
@@ -34,46 +34,46 @@ namespace WixToolset.Tag.Tuples
         Type,
     }
 
-    public class WixProductTagTuple : IntermediateTuple
+    public class WixProductTagSymbol : IntermediateSymbol
     {
-        public WixProductTagTuple() : base(TagTupleDefinitions.WixProductTag, null, null)
+        public WixProductTagSymbol() : base(TagSymbolDefinitions.WixProductTag, null, null)
         {
         }
 
-        public WixProductTagTuple(SourceLineNumber sourceLineNumber, Identifier id = null) : base(TagTupleDefinitions.WixProductTag, sourceLineNumber, id)
+        public WixProductTagSymbol(SourceLineNumber sourceLineNumber, Identifier id = null) : base(TagSymbolDefinitions.WixProductTag, sourceLineNumber, id)
         {
         }
 
-        public IntermediateField this[WixProductTagTupleFields index] => this.Fields[(int)index];
+        public IntermediateField this[WixProductTagSymbolFields index] => this.Fields[(int)index];
 
         public string FileRef
         {
-            get => this.Fields[(int)WixProductTagTupleFields.FileRef].AsString();
-            set => this.Set((int)WixProductTagTupleFields.FileRef, value);
+            get => this.Fields[(int)WixProductTagSymbolFields.FileRef].AsString();
+            set => this.Set((int)WixProductTagSymbolFields.FileRef, value);
         }
 
         public string Regid
         {
-            get => this.Fields[(int)WixProductTagTupleFields.Regid].AsString();
-            set => this.Set((int)WixProductTagTupleFields.Regid, value);
+            get => this.Fields[(int)WixProductTagSymbolFields.Regid].AsString();
+            set => this.Set((int)WixProductTagSymbolFields.Regid, value);
         }
 
         public string Name
         {
-            get => this.Fields[(int)WixProductTagTupleFields.Name].AsString();
-            set => this.Set((int)WixProductTagTupleFields.Name, value);
+            get => this.Fields[(int)WixProductTagSymbolFields.Name].AsString();
+            set => this.Set((int)WixProductTagSymbolFields.Name, value);
         }
 
         public int Attributes
         {
-            get => this.Fields[(int)WixProductTagTupleFields.Attributes].AsNumber();
-            set => this.Set((int)WixProductTagTupleFields.Attributes, value);
+            get => this.Fields[(int)WixProductTagSymbolFields.Attributes].AsNumber();
+            set => this.Set((int)WixProductTagSymbolFields.Attributes, value);
         }
 
         public string Type
         {
-            get => this.Fields[(int)WixProductTagTupleFields.Type].AsString();
-            set => this.Set((int)WixProductTagTupleFields.Type, value);
+            get => this.Fields[(int)WixProductTagSymbolFields.Type].AsString();
+            set => this.Set((int)WixProductTagSymbolFields.Type, value);
         }
     }
 }

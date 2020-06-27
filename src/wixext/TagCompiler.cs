@@ -6,9 +6,9 @@ namespace WixToolset.Tag
     using System.Collections.Generic;
     using System.Xml.Linq;
     using WixToolset.Data;
-    using WixToolset.Data.Tuples;
+    using WixToolset.Data.Symbols;
     using WixToolset.Extensibility;
-    using WixToolset.Tag.Tuples;
+    using WixToolset.Tag.Symbols;
 
     /// <summary>
     /// The compiler for the WiX Toolset Software Id Tag Extension.
@@ -137,7 +137,7 @@ namespace WixToolset.Tag
             {
                 var fileName = String.Concat(regid, " ", name, ".swidtag");
 
-                var tagTuple = section.AddTuple(new WixBundleTagTuple(sourceLineNumbers)
+                var tagSymbol = section.AddSymbol(new WixBundleTagSymbol(sourceLineNumbers)
                 {
                     Filename = fileName,
                     Regid = regid,
@@ -148,7 +148,7 @@ namespace WixToolset.Tag
 
                 if (YesNoType.Yes == licensed)
                 {
-                    tagTuple.Attributes = 1;
+                    tagSymbol.Attributes = 1;
                 }
             }
         }
@@ -230,21 +230,21 @@ namespace WixToolset.Tag
                 var fileName = String.Concat(regid, " ", name, ".swidtag");
                 var shortName = this.ParseHelper.CreateShortName(fileName, false, false);
 
-                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, TupleDefinitions.Directory, directoryId);
+                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, SymbolDefinitions.Directory, directoryId);
 
-                section.AddTuple(new ComponentTuple(sourceLineNumbers, fileId)
+                section.AddSymbol(new ComponentSymbol(sourceLineNumbers, fileId)
                 {
                     ComponentId = "*",
                     DirectoryRef = directoryId,
                     KeyPath = fileId.Id,
                 });
 
-                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, TupleDefinitions.Feature, feature);
+                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, SymbolDefinitions.Feature, feature);
                 this.ParseHelper.CreateComplexReference(section, sourceLineNumbers, ComplexReferenceParentType.Feature, feature, null, ComplexReferenceChildType.Component, fileId.Id, true);
 
-                section.AddTuple(new FileTuple(sourceLineNumbers, fileId)
+                section.AddSymbol(new FileSymbol(sourceLineNumbers, fileId)
                 {
-                    Attributes = FileTupleAttributes.ReadOnly,
+                    Attributes = FileSymbolAttributes.ReadOnly,
                     ComponentRef = fileId.Id,
                     DirectoryRef = directoryId,
                     DiskId = 1,
@@ -254,7 +254,7 @@ namespace WixToolset.Tag
                 });
 
                 this.ParseHelper.EnsureTable(section, sourceLineNumbers, TagTableDefinitions.SoftwareIdentificationTag);
-                var tuple = section.AddTuple(new WixProductTagTuple(sourceLineNumbers, fileId)
+                var symbol = section.AddSymbol(new WixProductTagSymbol(sourceLineNumbers, fileId)
                 {
                     Regid = regid,
                     Name = name,
@@ -263,10 +263,10 @@ namespace WixToolset.Tag
 
                 if (YesNoType.Yes == licensed)
                 {
-                    tuple.Attributes = 1;
+                    symbol.Attributes = 1;
                 }
 
-                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, TupleDefinitions.File, fileId.Id);
+                this.ParseHelper.CreateSimpleReference(section, sourceLineNumbers, SymbolDefinitions.File, fileId.Id);
             }
         }
 

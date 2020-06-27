@@ -5,20 +5,20 @@ namespace WixToolset.Tag
     using System;
     using WixToolset.Data;
 
-    public enum TagTupleDefinitionType
+    public enum TagSymbolDefinitionType
     {
         SoftwareIdentificationTag,
         WixBundleTag,
         WixProductTag,
     }
 
-    public static partial class TagTupleDefinitions
+    public static partial class TagSymbolDefinitions
     {
         public static readonly Version Version = new Version("4.0.0");
 
-        public static IntermediateTupleDefinition ByName(string name)
+        public static IntermediateSymbolDefinition ByName(string name)
         {
-            if (!Enum.TryParse(name, out TagTupleDefinitionType type))
+            if (!Enum.TryParse(name, out TagSymbolDefinitionType type))
             {
                 return null;
             }
@@ -26,18 +26,18 @@ namespace WixToolset.Tag
             return ByType(type);
         }
 
-        public static IntermediateTupleDefinition ByType(TagTupleDefinitionType type)
+        public static IntermediateSymbolDefinition ByType(TagSymbolDefinitionType type)
         {
             switch (type)
             {
-                case TagTupleDefinitionType.SoftwareIdentificationTag:
-                    return TagTupleDefinitions.SoftwareIdentificationTag;
+                case TagSymbolDefinitionType.SoftwareIdentificationTag:
+                    return TagSymbolDefinitions.SoftwareIdentificationTag;
 
-                case TagTupleDefinitionType.WixBundleTag:
-                    return TagTupleDefinitions.WixBundleTag;
+                case TagSymbolDefinitionType.WixBundleTag:
+                    return TagSymbolDefinitions.WixBundleTag;
 
-                case TagTupleDefinitionType.WixProductTag:
-                    return TagTupleDefinitions.WixProductTag;
+                case TagSymbolDefinitionType.WixProductTag:
+                    return TagSymbolDefinitions.WixProductTag;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type));

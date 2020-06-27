@@ -3,30 +3,30 @@
 namespace WixToolset.Tag
 {
     using WixToolset.Data;
-    using WixToolset.Tag.Tuples;
+    using WixToolset.Tag.Symbols;
 
-    public static partial class TagTupleDefinitions
+    public static partial class TagSymbolDefinitions
     {
-        public static readonly IntermediateTupleDefinition WixBundleTag = new IntermediateTupleDefinition(
-            TagTupleDefinitionType.WixBundleTag.ToString(),
+        public static readonly IntermediateSymbolDefinition WixBundleTag = new IntermediateSymbolDefinition(
+            TagSymbolDefinitionType.WixBundleTag.ToString(),
             new[]
             {
-                new IntermediateFieldDefinition(nameof(WixBundleTagTupleFields.Filename), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixBundleTagTupleFields.Regid), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixBundleTagTupleFields.Name), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixBundleTagTupleFields.Attributes), IntermediateFieldType.Number),
-                new IntermediateFieldDefinition(nameof(WixBundleTagTupleFields.Xml), IntermediateFieldType.String),
-                new IntermediateFieldDefinition(nameof(WixBundleTagTupleFields.Type), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixBundleTagSymbolFields.Filename), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixBundleTagSymbolFields.Regid), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixBundleTagSymbolFields.Name), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixBundleTagSymbolFields.Attributes), IntermediateFieldType.Number),
+                new IntermediateFieldDefinition(nameof(WixBundleTagSymbolFields.Xml), IntermediateFieldType.String),
+                new IntermediateFieldDefinition(nameof(WixBundleTagSymbolFields.Type), IntermediateFieldType.String),
             },
-            typeof(WixBundleTagTuple));
+            typeof(WixBundleTagSymbol));
     }
 }
 
-namespace WixToolset.Tag.Tuples
+namespace WixToolset.Tag.Symbols
 {
     using WixToolset.Data;
 
-    public enum WixBundleTagTupleFields
+    public enum WixBundleTagSymbolFields
     {
         Filename,
         Regid,
@@ -36,52 +36,52 @@ namespace WixToolset.Tag.Tuples
         Type,
     }
 
-    public class WixBundleTagTuple : IntermediateTuple
+    public class WixBundleTagSymbol : IntermediateSymbol
     {
-        public WixBundleTagTuple() : base(TagTupleDefinitions.WixBundleTag, null, null)
+        public WixBundleTagSymbol() : base(TagSymbolDefinitions.WixBundleTag, null, null)
         {
         }
 
-        public WixBundleTagTuple(SourceLineNumber sourceLineNumber, Identifier id = null) : base(TagTupleDefinitions.WixBundleTag, sourceLineNumber, id)
+        public WixBundleTagSymbol(SourceLineNumber sourceLineNumber, Identifier id = null) : base(TagSymbolDefinitions.WixBundleTag, sourceLineNumber, id)
         {
         }
 
-        public IntermediateField this[WixBundleTagTupleFields index] => this.Fields[(int)index];
+        public IntermediateField this[WixBundleTagSymbolFields index] => this.Fields[(int)index];
 
         public string Filename
         {
-            get => this.Fields[(int)WixBundleTagTupleFields.Filename].AsString();
-            set => this.Set((int)WixBundleTagTupleFields.Filename, value);
+            get => this.Fields[(int)WixBundleTagSymbolFields.Filename].AsString();
+            set => this.Set((int)WixBundleTagSymbolFields.Filename, value);
         }
 
         public string Regid
         {
-            get => this.Fields[(int)WixBundleTagTupleFields.Regid].AsString();
-            set => this.Set((int)WixBundleTagTupleFields.Regid, value);
+            get => this.Fields[(int)WixBundleTagSymbolFields.Regid].AsString();
+            set => this.Set((int)WixBundleTagSymbolFields.Regid, value);
         }
 
         public string Name
         {
-            get => this.Fields[(int)WixBundleTagTupleFields.Name].AsString();
-            set => this.Set((int)WixBundleTagTupleFields.Name, value);
+            get => this.Fields[(int)WixBundleTagSymbolFields.Name].AsString();
+            set => this.Set((int)WixBundleTagSymbolFields.Name, value);
         }
 
         public int Attributes
         {
-            get => this.Fields[(int)WixBundleTagTupleFields.Attributes].AsNumber();
-            set => this.Set((int)WixBundleTagTupleFields.Attributes, value);
+            get => this.Fields[(int)WixBundleTagSymbolFields.Attributes].AsNumber();
+            set => this.Set((int)WixBundleTagSymbolFields.Attributes, value);
         }
 
         public string Xml
         {
-            get => this.Fields[(int)WixBundleTagTupleFields.Xml].AsString();
-            set => this.Set((int)WixBundleTagTupleFields.Xml, value);
+            get => this.Fields[(int)WixBundleTagSymbolFields.Xml].AsString();
+            set => this.Set((int)WixBundleTagSymbolFields.Xml, value);
         }
 
         public string Type
         {
-            get => this.Fields[(int)WixBundleTagTupleFields.Type].AsString();
-            set => this.Set((int)WixBundleTagTupleFields.Type, value);
+            get => this.Fields[(int)WixBundleTagSymbolFields.Type].AsString();
+            set => this.Set((int)WixBundleTagSymbolFields.Type, value);
         }
     }
 }
