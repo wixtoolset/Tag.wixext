@@ -39,11 +39,11 @@ namespace WixToolset.Tag
                             break;
                     }
                     break;
-                case "Product":
+                case "Package":
                     switch (element.Name.LocalName)
                     {
                         case "Tag":
-                            this.ParseProductTagElement(intermediate, section, element);
+                            this.ParsePackageTagElement(intermediate, section, element);
                             break;
                         default:
                             this.ParseHelper.UnexpectedElement(parentElement, element);
@@ -157,7 +157,7 @@ namespace WixToolset.Tag
         /// Parses a Tag element for Software Id Tag registration under a Product element.
         /// </summary>
         /// <param name="node">The element to parse.</param>
-        private void ParseProductTagElement(Intermediate intermediate, IntermediateSection section, XElement node)
+        private void ParsePackageTagElement(Intermediate intermediate, IntermediateSection section, XElement node)
         {
             var sourceLineNumbers = this.ParseHelper.GetSourceLineNumbers(node);
             string name = null;
