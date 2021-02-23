@@ -256,6 +256,7 @@ namespace WixToolset.Tag
                 this.ParseHelper.EnsureTable(section, sourceLineNumbers, TagTableDefinitions.SoftwareIdentificationTag);
                 var symbol = section.AddSymbol(new WixProductTagSymbol(sourceLineNumbers, fileId)
                 {
+                    FileRef = fileId.Id,
                     Regid = regid,
                     Name = name,
                     Type = type,

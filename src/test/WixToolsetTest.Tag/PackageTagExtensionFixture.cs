@@ -8,18 +8,20 @@ namespace WixToolsetTest.Tag
     using WixToolset.Tag;
     using Xunit;
 
-    public class TagExtensionFixture
+    public class PackageTagExtensionFixture
     {
-        [Fact(Skip = "Currently fails")]
-        public void CanBuildUsingProductTag()
+        [Fact]
+        public void CanBuildPackageWithTag()
         {
             var folder = TestData.Get(@"TestData\ProductTag");
             var build = new Builder(folder, typeof(TagExtensionFactory), new[] { folder });
 
-            var results = build.BuildAndQuery(Build, "Property");
-            Assert.Equal(new[]
+            var results = build.BuildAndQuery(Build, "File", "SoftwareIdentificationTag");
+            WixAssert.CompareLineByLine(new[]
             {
-                "Property:",
+                "File:filF5_pLhBuF5b4N9XEo52g_hUM5Lo\tfilF5_pLhBuF5b4N9XEo52g_hUM5Lo\texample.txt\t20\t\t\t512\t1",
+                "File:tagkVqdRrA2JRwvrWCPR6pTv7eOzoE\ttagkVqdRrA2JRwvrWCPR6pTv7eOzoE\tth_a8yhh|regid.2008-09.org.wixtoolset ~TagTestPackage.swidtag\t910\t\t\t1\t2",
+                "SoftwareIdentificationTag:tagkVqdRrA2JRwvrWCPR6pTv7eOzoE\tregid.2008-09.org.wixtoolset\t8738B0C5-C4AA-4634-8C03-11EAA2F1E15D\tComponent"
             }, results.ToArray());
         }
 

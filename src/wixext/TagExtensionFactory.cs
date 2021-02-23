@@ -12,6 +12,7 @@ namespace WixToolset.Tag
         {
             typeof(TagCompiler),
             typeof(TagExtensionData),
+            typeof(TagBurnBackendBinderExtension),
             typeof(TagWindowsInstallerBackendBinderExtension),
         };
     }
